@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+    name: azure-backend-server
+    labels:
+        tier: azure-backend
+        app: azure-goserver
+spec:
+    securityContext:
+       seccompProfile:
+         type: RuntimeDefault
+    containers:
+        - name: goserver
+          image: terrascan.azurecr.io/terrascan-e2e-test:nginx@sha256:3f13b4376446cf92b0cb9a5c46ba75d57c41f627c4edb8b635fa47386ea29e20
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true   
+          resources:
+            requests:
+                cpu: "1"
+                memory: "256Mi"
+            limits:
+                cpu: "1"
+                memory: "256Mi"  
